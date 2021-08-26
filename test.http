@@ -1,0 +1,14 @@
+@hostname = http://localhost:3001
+
+GET {{hostname}} HTTP/1.1
+Authorization: Basic carlos:password
+
+###
+
+GET {{hostname}} HTTP/1.1
+Authorization: Basic admin supersecret
+
+###
+
+GET {{hostname}}/login HTTP/1.1
+Authorization: Basic carlos password
