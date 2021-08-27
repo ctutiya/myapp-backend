@@ -18,13 +18,11 @@ app.use(basicAuth({
     // },
     // challenge: true,
     unauthorizedResponse: () => {
-        console.log("I am here in basicAuth config. Unauthorised!!")
+        console.log("unauthorizedResponse")
 
         return "You are unauthorized!!"
     },
     authorizer: (email, password) => {
-        console.log("#1. username and password input: ", email, password)
-
         const admin = {
             _email: "carlos",
             _password: "password"
@@ -34,8 +32,7 @@ app.use(basicAuth({
         const passwordMatches = basicAuth.safeCompare(password, admin._password)
 
         if (userMatches && passwordMatches) {
-            // both match -- working
-            console.log("#2. Authorized!! both password and username match", userMatches, passwordMatches)
+            console.log("authorizer")
 
             return userMatches & passwordMatches
         }
@@ -47,23 +44,20 @@ app.get('/', (req, res, next) => {
 })
 
 app.put('/login', (req, res) => {
-    console.log(req)
-
-    // create input data object
     let param = {
         email: req.body.email,
         password: req.body.password
     }
 
-    console.log("#3. req.body is ", param)
+    console.log(param)
 
     // check if the login user is ok to be authorized
     if (param.email === "carlos" && param.password === "password") {
-        console.log("I am here returning json to frontend")
+        console.log("login successfully!")
 
         res.send({
             msg: "SUCCESS",
-            username: param.username,
+            email: param.email,
             password: param.password
         })
     }

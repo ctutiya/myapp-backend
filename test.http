@@ -10,5 +10,11 @@ Authorization: Basic admin supersecret
 
 ###
 
-GET {{hostname}}/login HTTP/1.1
+PUT {{hostname}}/login HTTP/1.1
 Authorization: Basic carlos password
+content-type: application/json
+
+{
+    "email": "carlos",
+    "password": "password"
+}
